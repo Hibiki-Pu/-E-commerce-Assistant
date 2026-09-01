@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "company_name": "厦门吉宏科技股份有限公司",
+  "company_code": "002803.SZ",
+  "periods": "2022-2025",
+  "basis": "as_reported",
+  "data_kind": "public_report",
+  "facts": 132,
+  "warnings": [
+    "采用当年原披露口径 as_reported，并非按最新年报重述的可比历史序列。",
+    "2022年经营现金流：原年报为372,841,176.49元；2023/2024年报比较数为390,955,098.53元，相差18,113,922.04元。本包保留原值，不把差异分摊到季度；跨年分析须说明版本差异。",
+    "2022年互联网业务含跨境电商和互联网营销广告，不等于2023-2025年电商业务。不得将两个业务分类直接同比；原年报业务分类全部保留。",
+    "真实公开年报汇总，不是公司内部订单。无订单数、退款、SKU成本、流量或广告归因数据；缺失不等于零。",
+    "毛利=营业收入-营业成本；毛利不等于净利润，也不同于模拟订单的商品贡献利润。销售费用不等于纯广告费。",
+    "合并净利润与归母净利润分开存储；季度披露的是归母净利润，不是合并净利润。年度、季度、业务汇总禁止相加。"
+  ],
+  "files": [
+    {
+      "name": "annual_data.csv",
+      "rows": 44
+    },
+    {
+      "name": "quarterly_data.csv",
+      "rows": 64
+    },
+    {
+      "name": "business_data.csv",
+      "rows": 24
+    }
+  ],
+  "reconciliation_checks": 24,
+  "source_text_checks": 131,
+  "visually_checked_split_cells": 1,
+  "sources": {
+    "2022": "https://static.cninfo.com.cn/finalpage/2023-04-12/1216381312.PDF",
+    "2023": "https://static.cninfo.com.cn/finalpage/2024-03-30/1219463249.PDF",
+    "2024": "https://static.cninfo.com.cn/finalpage/2025-04-02/1222983627.PDF",
+    "2025": "https://static.cninfo.com.cn/finalpage/2026-04-01/1225066431.PDF"
+  }
+}

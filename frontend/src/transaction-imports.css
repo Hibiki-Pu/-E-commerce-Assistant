@@ -1,0 +1,58 @@
+.import-page { color: #40394e; }
+.import-nav { padding: 22px 5%; background: #fff; border-bottom: 1px solid #e6e1ed; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.import-nav>a { font-size: 19px; font-weight: 650; color: #6051bc; }
+.import-nav>a span { font-size: 12px; color: #8b8197; font-weight: 400; }
+.import-nav nav { flex-direction: row; gap: 12px; }
+.import-nav nav a { padding: 4px; font-size: 12px; }
+.import-page main { max-width: 1250px; padding: 36px 30px 0; }
+.import-intro { color: #83768e; font-size: 13px; line-height: 1.9; margin: 12px 0 20px; }
+.import-notice { background: #efecfc; border: 1px solid #e0d9f4; border-radius: 9px; padding: 17px 20px; font-size: 12px; line-height: 1.9; color: #79668f; }
+.import-notice a { text-decoration: underline; margin: 0 4px; }
+.import-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 22px; margin: 24px 0; }
+.upload-panel, .protocol-panel, .import-result, .import-history { padding: 25px; }
+.import-page h2 { font-size: 16px; margin-bottom: 20px; }
+.upload-panel fieldset { padding: 0; border: 0; margin: 0; min-width: 0; }
+.upload-panel label { display: block; color: #776783; font-size: 12px; margin: 18px 0 9px; }
+.upload-panel select, .upload-panel input { width: 100%; border: 1px solid #ddd5e8; padding: 10px 12px; background: #fff; border-radius: 7px; color: #61516f; font-size: 13px; min-width: 0; }
+.upload-panel input[type=file] { padding: 18px 12px; background: #faf9fd; border-style: dashed; }
+.import-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.import-help { font-size: 11px; color: #8b7b98; line-height: 1.9; margin: 12px 0; overflow-wrap: anywhere; }
+.import-page .primary { min-height: 40px; margin-top: 16px; font-size: 12px; }
+.import-page button:disabled { cursor: not-allowed; opacity: .45; }
+.header-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.header-chips code { background: #f1edf8; color: #837091; padding: 6px 9px; border-radius: 5px; font-size: 11px; }
+.protocol-panel p, .protocol-panel li { font-size: 12px; line-height: 1.9; color: #83718f; }
+.protocol-panel p { margin: 16px 0; }
+.protocol-panel ul { padding-left: 18px; margin: 0 0 18px; }
+.protocol-panel details { padding-top: 18px; border-top: 1px solid #eee8f5; }
+.protocol-panel summary { font-size: 12px; cursor: pointer; color: #74618e; }
+.example-links { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 17px; font-size: 12px; color: #7660b1; }
+.example-links a { text-decoration: underline; }
+.import-result { margin: 22px 0; }
+.result-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.result-heading button { background: #f1edf8; border-radius: 5px; color: #7c6597; padding: 9px 12px; font-size: 11px; }
+.result-valid, .result-invalid { padding: 13px 16px; border-radius: 6px; font-size: 12px; line-height: 1.8; background: #edf7f1; color: #537d65; }
+.result-invalid { background: #fff1ec; color: #b7674e; }
+.import-counts { display: flex; gap: 32px; flex-wrap: wrap; padding: 22px 0 5px; font-size: 11px; color: #9a82a8; }
+.import-counts strong { display: block; font-size: 25px; color: #7b628c; margin-bottom: 5px; font-weight: 600; }
+.issue-list { border: 1px solid #e9e1f0; border-radius: 7px; overflow: hidden; margin: 18px 0; }
+.issue-list h3 { font-size: 12px; padding: 13px 15px; background: #f7f4fa; }
+.issue-list h3 span { font-weight: 400; margin-left: 10px; }
+.error-tone h3 { background: #fff0ec; color: #ac664f; }
+.warning-tone h3 { background: #fcf5e6; color: #a6894e; }
+.issue-list td, .issue-list th { text-align: left; white-space: normal; vertical-align: top; min-width: 95px; line-height: 1.8; }
+.issue-list td:last-child { min-width: 230px; overflow-wrap: anywhere; }
+.issue-pager { display: flex; justify-content: space-between; gap: 10px; padding: 13px; align-items: center; font-size: 11px; }
+.issue-pager button { color: #846d97; padding: 7px 11px; background: #f3eef8; border-radius: 5px; }
+.import-dashboard-link { display: inline-block; color: #7460bc; margin-top: 12px; font-size: 13px; }
+.import-history>p { font-size: 12px; color: #8a7798; line-height: 1.8; margin-bottom: 16px; }
+.import-history th, .import-history td { text-align: left; }
+@media(max-width: 750px) {
+  .import-nav { display: block; padding: 18px; }
+  .import-nav nav { margin-top: 16px; flex-wrap: wrap; justify-content: flex-start; }
+  .import-page main { padding: 24px 16px 0; }
+  .import-layout { grid-template-columns: 1fr; gap: 16px; }
+  .upload-panel, .protocol-panel, .import-result, .import-history { padding: 20px; }
+  .import-counts { gap: 20px; }
+  .import-dates { gap: 9px; }
+}
