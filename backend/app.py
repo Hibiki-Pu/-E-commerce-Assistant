@@ -4,24 +4,26 @@ from flask import Flask, jsonify, request, send_from_directory
 
 from .db import DEFAULT_DB, ROOT, connect
 from .metrics import dashboard
+from .financial_analysis import register_financial_analysis
 from .public_financials import DEFAULT_PUBLIC_DB, register_public_financials
 from .transaction_imports import register_transaction_imports
 from .transaction_store import DEFAULT_IMPORT_DB
 from .validation import validate_database
 
 
-def create_app(db_path=DEFAULT_DB, public_db_path=DEFAULT_PUBLIC_DB, import_db_path=DEFAULT_IMPORT_DB):
+def create_app(db_path=DEFAULT_DB, public_db_path=DEFAULT_PUBLIC_DB, import_db_path=DEFAULT_IMPORT_DB, ai_client=None):
     app = Flask(__name__, static_folder=None)
     app.json.ensure_ascii = False
     # 数据异常要在启动时显式暴露，不静默生成或覆盖。
     with closing(connect(db_path)) as conn:
         validate_database(conn)
     register_public_financials(app, public_db_path)
+    register_financial_analysis(app, public_db_path, ai_client)
     register_transaction_imports(app, import_db_path)
 
     @app.get('/api/health')
     def health():
-        return jsonify(status='ok', is_simulated=True, stage=2, public_financials=True, transaction_imports=True)
+        return jsonify(status='ok', is_simulated=True, stage=3, public_financials=True, transaction_imports=True, financial_analysis=True)
 
     @app.get('/api/meta')
     def meta():
@@ -60,6 +62,7 @@ def create_app(db_path=DEFAULT_DB, public_db_path=DEFAULT_PUBLIC_DB, import_db_p
     @app.get('/public-financials')
     @app.get('/imports')
     @app.get('/imported')
+    @app.get('/financial-analysis')
     def index():
         if not (ROOT / 'frontend/dist/index.html').exists():
             return '请先在 frontend 运行 npm run build，或使用 Vite 开发模式。', 503

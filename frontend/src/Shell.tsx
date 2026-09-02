@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 
-export type ShellPage = 'dashboard' | 'imported' | 'public-financials' | 'imports'
+export type ShellPage = 'dashboard' | 'imported' | 'public-financials' | 'imports' | 'financial-analysis'
 type Theme = 'light' | 'dark'
 
 export function Icon({ name, size = 20 }: { name: string; size?: number }) {
@@ -57,9 +57,9 @@ export function AppShell({ page, section = 'overview', onSectionChange, title, s
       <div className="workspace"><span className="store-mark">商</span><div>{imported ? '导入店铺 · 未核验' : '本地数据工作台'}<small>单店铺 · 人民币</small></div><span className="workspace-dot" /></div>
       <span className="nav-heading">工作空间</span>
       <nav>{sections.map(item => <a key={item.id} href={dashboardHref(item.id)} className={isDashboard && section === item.id ? 'active' : ''} onClick={() => isDashboard && onSectionChange?.(item.id)}><Icon name={item.icon} />{item.name}{isDashboard && section === item.id && <span className="nav-indicator" />}</a>)}</nav>
-      <nav aria-label="公开数据"><a className={page === 'public-financials' ? 'active' : ''} href="/public-financials"><Icon name="book" />公开财报导入{page === 'public-financials' && <span className="nav-indicator" />}</a></nav>
+      <nav aria-label="公开数据"><a className={page === 'public-financials' ? 'active' : ''} href="/public-financials"><Icon name="book" />公开财报导入{page === 'public-financials' && <span className="nav-indicator" />}</a><a className={page === 'financial-analysis' ? 'active' : ''} href="/financial-analysis"><Icon name="spark" />AI 财报分析{page === 'financial-analysis' && <span className="nav-indicator" />}</a></nav>
       <nav aria-label="交易数据"><a className={page === 'imports' ? 'active' : ''} href="/imports"><Icon name="box" />交易表导入{page === 'imports' && <span className="nav-indicator" />}</a><a className={page === 'imported' ? 'active' : ''} href="/imported"><Icon name="chart" />导入数据看板{page === 'imported' && <span className="nav-indicator" />}</a></nav>
-      <div className="ai-note"><span className="mini-label"><Icon name="spark" size={17} /> AI 经营解读</span><strong>后续接入</strong><p>本阶段由程序计算指标，<br />不生成 AI 分析结论。</p></div>
+      <div className="ai-note"><span className="mini-label"><Icon name="spark" size={17} /> AI 财报分析</span><strong>第三阶段</strong><p>程序计算数值，模型解释证据；<br />结果需人工复核。</p></div>
       <div className="sidebar-footer"><span className="avatar">作</span><div>个人求职作品<small>本地演示 · 交易导入已接入</small></div></div>
     </aside>
 

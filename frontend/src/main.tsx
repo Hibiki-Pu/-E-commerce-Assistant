@@ -4,6 +4,7 @@ import { getJson, money, shiftDate } from './format'
 import { Trend } from './Trend'
 import { PublicFinancials } from './PublicFinancials'
 import { TransactionImports } from './TransactionImports'
+import { FinancialAnalysis } from './FinancialAnalysis'
 import { AppShell, Icon } from './Shell'
 import type { Change, Dashboard, Meta, MetricKey } from './types'
 import './style.css'
@@ -100,4 +101,4 @@ function App({ imported = false }: { imported?: boolean }) {
   </AppShell>
 }
 
-createRoot(document.getElementById('root')!).render(<React.StrictMode>{location.pathname === '/public-financials' ? <PublicFinancials /> : location.pathname === '/imports' ? <TransactionImports /> : <App imported={location.pathname === '/imported'} />}</React.StrictMode>)
+createRoot(document.getElementById('root')!).render(<React.StrictMode>{location.pathname === '/public-financials' ? <PublicFinancials /> : location.pathname === '/financial-analysis' ? <FinancialAnalysis /> : location.pathname === '/imports' ? <TransactionImports /> : <App imported={location.pathname === '/imported'} />}</React.StrictMode>)
