@@ -8,13 +8,20 @@
   --accent:#6255d9;
   --muted:#848496;
   --border:#ebeaf2;
-  --dark:#29263f
+  --dark:#29263f;
+  --page-bg:#f6f7fb;
+  --surface:#fff;
+  --surface-soft:#f8f7fc;
+  --text:#272637
 }
 * {
   box-sizing:border-box
 }
 body {
-  margin:0
+  margin:0;
+  color:var(--text);
+  background:var(--page-bg);
+  transition:background-color .2s ease,color .2s ease
 }
 button,input,select {
   font:inherit
@@ -1297,10 +1304,28 @@ td:first-child,td:nth-child(2) {
     animation:none
   }
 }
+.theme-toggle {
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:0 10px;
+  border:1px solid #e1ddea;
+  border-radius:7px;
+  color:#6f687f;
+  background:#fff;
+  font-size:11px
+}
+.theme-toggle:hover {
+  color:var(--accent);
+  border-color:#cfc7ef;
+  background:#f7f5fd
+}
 
 /* 次要文字仍需清晰可读，避免为了视觉层级牺牲业务说明。 */
 .sidebar { overflow-y: auto; }
 .sidebar nav, .sidebar-footer, .ai-note, .workspace { flex-shrink: 0; }
+.sidebar nav[aria-label] { margin-top: 9px; }
 .panel-title p, .metric-card p, .section-line>span,
 .chart-readout, .comparison-footnote, .table-footer,
 .definition-card p, .definition-card ul, .validation-line,
@@ -1322,4 +1347,124 @@ td:first-child,td:nth-child(2) {
   .primary {
     justify-content: center;
   }
+  .topbar {
+    min-height:58px;
+    height:auto;
+    padding:10px 16px;
+  }
+  .topbar>div:first-child,.topbar-right>.separator,.topbar-right>.demo-tag {
+    display:none;
+  }
+  .topbar-right {
+    width:100%;
+    justify-content:flex-end
+  }
+  .theme-toggle {
+    margin-right:auto
+  }
 }
+
+html[data-theme="dark"] {
+  color-scheme:dark;
+  --page-bg:#11131a;
+  --surface:#191c26;
+  --surface-soft:#222633;
+  --text:#e9e7f1;
+  --muted:#aaa5b8;
+  --border:#303544;
+  --dark:#f0edf7;
+  --accent:#9b8cff;
+  background:#11131a
+}
+html[data-theme="dark"] .main-shell { background:#11131a; }
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .metric-card,
+html[data-theme="dark"] .table-footer { background:#191c26; }
+html[data-theme="dark"] .topbar { background:#191c26e8; }
+html[data-theme="dark"] h1,
+html[data-theme="dark"] .panel-title h2,
+html[data-theme="dark"] .product-name,
+html[data-theme="dark"] .public-empty h3,
+html[data-theme="dark"] .public-form label { color:#efedf7; }
+html[data-theme="dark"] .brand small,
+html[data-theme="dark"] .workspace small,
+html[data-theme="dark"] .nav-heading,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .topbar strong,
+html[data-theme="dark"] .page-heading p,
+html[data-theme="dark"] .period-stamp span,
+html[data-theme="dark"] .period-stamp strong,
+html[data-theme="dark"] .field label,
+html[data-theme="dark"] .section-line>span,
+html[data-theme="dark"] .metric-card p,
+html[data-theme="dark"] .panel-title p,
+html[data-theme="dark"] .comparison-table td,
+html[data-theme="dark"] .product-meta,
+html[data-theme="dark"] .definition-card p,
+html[data-theme="dark"] .definition-card ul,
+html[data-theme="dark"] .page-footer { color:#aaa5b8; }
+html[data-theme="dark"] .workspace,
+html[data-theme="dark"] .presets,
+html[data-theme="dark"] .subtle-tag,
+html[data-theme="dark"] .comparison-footnote,
+html[data-theme="dark"] .public-downloads { background:#222633; border-color:#303544; }
+html[data-theme="dark"] nav a { color:#b9b4c7; }
+html[data-theme="dark"] nav a:hover { background:#242837; }
+html[data-theme="dark"] nav a.active { color:#b5a9ff; background:#292b45; }
+html[data-theme="dark"] .store-mark,
+html[data-theme="dark"] .avatar,
+html[data-theme="dark"] .metric-icon,
+html[data-theme="dark"] .header-chips code,
+html[data-theme="dark"] .result-heading button,
+html[data-theme="dark"] .issue-pager button { background:#2a2e3d; color:#c1b7e4; }
+html[data-theme="dark"] .ai-note { background:linear-gradient(135deg,#222536,#1c202c); border-color:#303544; }
+html[data-theme="dark"] .theme-toggle { color:#ded9ef; background:#252938; border-color:#3a4052; }
+html[data-theme="dark"] .theme-toggle:hover { color:#fff; background:#30364a; border-color:#68608f; }
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field select,
+html[data-theme="dark"] .upload-panel select,
+html[data-theme="dark"] .upload-panel input,
+html[data-theme="dark"] .public-form select,
+html[data-theme="dark"] .public-form input { color:#ebe8f4; background:#202430; border-color:#3a4050; }
+html[data-theme="dark"] .upload-panel input[type=file],
+html[data-theme="dark"] .public-form input[type=file] { background:#1c202b; }
+html[data-theme="dark"] .presets button:hover,
+html[data-theme="dark"] .public-confirm,
+html[data-theme="dark"] .public-tabs button { color:#c9c2e4; background:#252938; border-color:#3a4052; }
+html[data-theme="dark"] .metric-card.featured { background:linear-gradient(120deg,#282842,#1b1e29); border-color:#3b3b5c; }
+html[data-theme="dark"] .simulation-banner,
+html[data-theme="dark"] .import-notice,
+html[data-theme="dark"] .public-notice { color:#c1b8dd; background:#25263d; border-color:#3c3b60; }
+html[data-theme="dark"] .simulation-banner strong { color:#ddd7f1; }
+html[data-theme="dark"] .quality-warning { color:#d8c38f; background:#302919; border-color:#514329; }
+html[data-theme="dark"] th,
+html[data-theme="dark"] .public-page th { color:#bbb4c9; background:#202430; }
+html[data-theme="dark"] td,
+html[data-theme="dark"] .public-page td,
+html[data-theme="dark"] .metric-bottom,
+html[data-theme="dark"] .comparison-table td,
+html[data-theme="dark"] .validation-line { color:#c1bacd; border-color:#303544; }
+html[data-theme="dark"] .chart-container text { fill:#aaa5b8; }
+html[data-theme="dark"] .scenario-details { border-color:#454052; color:#bbb2ca; }
+html[data-theme="dark"] .import-page,
+html[data-theme="dark"] .protocol-panel p,
+html[data-theme="dark"] .protocol-panel li,
+html[data-theme="dark"] .import-help,
+html[data-theme="dark"] .import-history>p,
+html[data-theme="dark"] .public-heading p,
+html[data-theme="dark"] .public-form p,
+html[data-theme="dark"] .public-downloads p,
+html[data-theme="dark"] .public-fineprint,
+html[data-theme="dark"] .public-boundaries ol,
+html[data-theme="dark"] .public-boundaries>p { color:#b4aebe; }
+html[data-theme="dark"] .public-badge { color:#c7bfff; background:#292b45; border-color:#454571; }
+html[data-theme="dark"] .public-tabs button.selected { color:#d0c9ff; background:#323354; border-color:#5d5794; }
+html[data-theme="dark"] .public-success,
+html[data-theme="dark"] .result-valid { color:#9fd0b5; background:#183126; }
+html[data-theme="dark"] .public-errors,
+html[data-theme="dark"] .result-invalid,
+html[data-theme="dark"] .error-tone h3,
+html[data-theme="dark"] .error { color:#efad9e; background:#3a211e; border-color:#63362e; }
+html[data-theme="dark"] .warning-tone h3 { color:#dfc382; background:#382f1e; }

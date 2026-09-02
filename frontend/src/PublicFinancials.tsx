@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AppShell } from './Shell'
 import './public-financials.css'
 
 type DatasetType = 'annual' | 'quarterly' | 'business'
@@ -59,8 +60,8 @@ export function PublicFinancials() {
   const failed = data?.checks.filter(c => c.status === 'failed').length ?? 0
   const imported = data?.facts.length ?? 0
 
-  return <div className="public-page">
-    <header className="public-nav"><a className="public-brand" href="/">商析 <b>AI</b><span>公开数据工作台</span></a><a href="/">← 返回模拟订单看板</a></header>
+  return <AppShell page="public-financials" title="公开财报导入" sourceTag="公开资料 · 独立数据">
+    <div className="public-page">
     <main className="public-main">
       <div className="public-heading"><div><div className="eyebrow">COMMERCE INSIGHT / 02</div><h1>从公开财报，建立可核查的数据底稿。</h1><p>厦门吉宏科技股份有限公司 · 002803.SZ · 2022—2025</p></div><span className="public-badge">公开年报 · 非内部订单</span></div>
       <div className="public-notice"><strong>独立数据分支。</strong> 本页导入真实公开汇总数据，原模拟订单库保持不变。金额为人民币元；年度、季度、业务分类分别分析，禁止合并求和。</div>
@@ -109,5 +110,6 @@ export function PublicFinancials() {
       <section className="public-boundaries"><span className="public-step">03 / DEFINITIONS</span><h2>先说明边界，再解释变化。</h2><ol>{data?.manifest.warnings.map(warning => <li key={warning}>{warning}</li>)}</ol><p>这是基于公开资料的个人分析项目，不代表与吉宏股份存在客户或实习合作。本阶段不生成 AI 结论，不提供投资建议。</p></section>
       <footer className="page-footer"><span>商析 AI · 第二阶段：公开财报导入</span><span>Excel / CSV → 格式校验 → 独立 SQLite → 来源追溯</span></footer>
     </main>
-  </div>
+    </div>
+  </AppShell>
 }

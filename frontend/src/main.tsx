@@ -4,24 +4,9 @@ import { getJson, money, shiftDate } from './format'
 import { Trend } from './Trend'
 import { PublicFinancials } from './PublicFinancials'
 import { TransactionImports } from './TransactionImports'
+import { AppShell, Icon } from './Shell'
 import type { Change, Dashboard, Meta, MetricKey } from './types'
 import './style.css'
-
-function Icon({ name, size = 20 }: { name: string; size?: number }) {
-  const paths: Record<string, React.ReactNode> = {
-    chart: <><path d="M4 19V5M4 19h16M8 15v-4m5 4V7m5 8V4" /></>,
-    grid: <><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></>,
-    box: <><path d="m12 3 9 5v9l-9 5-9-5V8l9-5Zm0 9v10M3 8l9 4 9-4M7.5 5.5l9 5" /></>,
-    book: <><path d="M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4V4Zm8 2v15" /></>,
-    spark: <path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z" />,
-    arrow: <><path d="M5 12h14m-5-5 5 5-5 5" /></>,
-    money: <><path d="m7 4 5 6 5-6M12 10v11M6 11h12M6 16h12" /></>,
-    refund: <><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6" /></>,
-    alert: <><path d="m12 3 10 18H2L12 3ZM12 9v5m0 3v.1" /></>,
-    check: <><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></>,
-  }
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name] || paths.chart}</svg>
-}
 
 const metrics: { key: MetricKey; label: string; note: string; icon: string }[] = [
   { key: 'sales_cents', label: '销售额', note: '商品实付金额 · 按支付日', icon: 'money' },
@@ -75,20 +60,7 @@ function App({ imported = false }: { imported?: boolean }) {
     setDraft(next); setFilters(next); setFormError('')
   }
 
-  return <div className="app-shell">
-    <aside className="sidebar">
-      <a className="brand" href="#overview"><span className="brand-symbol"><Icon name="chart" size={25} /></span><span>商析 <b>AI</b><small>电商经营复盘助手</small></span></a>
-      <div className="workspace"><span className="store-mark">商</span><div>{imported ? '导入店铺 · 未核验' : '模拟店铺'}<small>单店铺 · 人民币</small></div><span className="workspace-dot" /></div>
-      <span className="nav-heading">工作空间</span>
-      <nav>{[{ id: 'overview', name: '经营概览', icon: 'grid' }, { id: 'trends', name: '每日趋势', icon: 'chart' }, { id: 'products', name: '商品表现', icon: 'box' }, { id: 'definitions', name: '数据与口径', icon: 'book' }].map(item => <a key={item.id} href={'#' + item.id} className={tab === item.id ? 'active' : ''} onClick={() => setTab(item.id)}><Icon name={item.icon} />{item.name}{tab === item.id && <span className="nav-indicator" />}</a>)}</nav>
-      <nav aria-label="公开数据"><a href="/public-financials"><Icon name="book" />公开财报导入</a></nav>
-      <nav aria-label="交易数据"><a href="/imports"><Icon name="box" />交易表导入</a><a href={imported ? '/' : '/imported'}><Icon name="chart" />{imported ? '切换模拟看板' : '导入数据看板'}</a></nav>
-      <div className="ai-note"><span className="mini-label"><Icon name="spark" size={17} /> AI 经营解读</span><strong>后续接入</strong><p>本阶段由程序计算指标，<br />不生成 AI 分析结论。</p></div>
-      <div className="sidebar-footer"><span className="avatar">作</span><div>个人求职作品<small>本地演示 · 交易导入已接入</small></div></div>
-    </aside>
-
-    <div className="main-shell">
-      <header className="topbar"><div>工作空间 <span>/</span> <strong>经营概览</strong></div><div className="topbar-right"><span className="local-dot" /> 本地运行 <span className="separator" /><span className="demo-tag">{imported ? '用户导入 · 来源未核验' : '模拟数据'}</span></div></header>
+  return <AppShell page={imported ? 'imported' : 'dashboard'} section={tab} onSectionChange={setTab} title="经营概览" sourceTag={imported ? '用户导入 · 来源未核验' : '模拟数据'}>
       <main id="overview">
         <div className="page-heading"><div><div className="eyebrow">COMMERCE INSIGHT / 01</div><h1>把经营变化，看清楚。</h1><p>从销售到商品贡献，让每一次复盘都有数据依据。</p></div><div className="period-stamp"><span>数据观察期</span><strong>{meta ? `${meta.start_date.replaceAll('-', '.')} — ${meta.end_date.replaceAll('-', '.')}` : '加载中'}</strong></div></div>
         <div className="simulation-banner"><Icon name="book" size={18} /><span>{imported ? <><strong>当前展示用户导入数据，来源未核验。</strong> 不包含模拟库与财报库。请保证声明观察期的数据完整；模拟测试文件也会计入此库，不能当成真实商家成果。</> : <><strong>这是一份模拟经营数据。</strong> 固定随机种子生成，仅用于个人项目展示，不代表真实商家经营结果。</>}</span><a href="#definitions">查看说明 <Icon name="arrow" size={14} /></a></div>
@@ -125,8 +97,7 @@ function App({ imported = false }: { imported?: boolean }) {
         </section>
         <footer className="page-footer"><span>商析 AI · 个人求职展示项目</span><span>React + TypeScript / Flask / SQLite · {imported ? "仅本地导入数据" : "仅本地模拟数据"}</span></footer>
       </main>
-    </div>
-  </div>
+  </AppShell>
 }
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode>{location.pathname === '/public-financials' ? <PublicFinancials /> : location.pathname === '/imports' ? <TransactionImports /> : <App imported={location.pathname === '/imported'} />}</React.StrictMode>)

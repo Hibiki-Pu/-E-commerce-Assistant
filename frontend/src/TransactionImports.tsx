@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getJson } from './format'
+import { AppShell } from './Shell'
 import './transaction-imports.css'
 
 type Kind = 'orders' | 'refunds' | 'costs'
@@ -102,10 +103,8 @@ export function TransactionImports() {
     setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
-  return <div className="import-page">
-    <header className="import-nav"><a href="/">商析 AI <span> / 本地数据工作台</span></a>
-      <nav><a href="/">模拟经营看板</a><a href="/public-financials">公开财报</a><a href="/imported">导入数据看板 →</a></nav>
-    </header>
+  return <AppShell page="imports" title="交易表导入" sourceTag="用户导入 · 来源未核验">
+    <div className="import-page">
     <main>
       <div className="eyebrow">DATA IMPORT / 02</div>
       <h1>先检查数据，再开始复盘。</h1>
@@ -180,5 +179,6 @@ export function TransactionImports() {
       </section>
       <footer className="page-footer">仅本地处理 · 单店铺 / 人民币 · 不接模型，不执行表格文本或公式</footer>
     </main>
-  </div>
+    </div>
+  </AppShell>
 }
